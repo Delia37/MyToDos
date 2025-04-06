@@ -1,6 +1,6 @@
 # 📋 MyToDos
 
-A full-stack task management app that lets users manage their tasks, connect with friends, send/accept friend requests, and customize their profiles.
+MyToDos is a full-stack task management application built with Spring Boot (Java) on the backend and React on the frontend. It allows users to register, log in, manage tasks, send and accept friend requests, and edit profile information. It's designed with collaboration in mind, enabling team productivity through shared tasks.
 
 ## 🚀 Features
 
@@ -58,23 +58,54 @@ A full-stack task management app that lets users manage their tasks, connect wit
 
 ## 🛠️ Setup Instructions
 
-### 1. Backend
+### 1. Database (PostgreSQL)
 
-1. Clone the repo
-2. Set up PostgreSQL database
-3. Configure `application.properties` with your DB credentials:
-    ```properties
-    spring.datasource.url=jdbc:postgresql://localhost:5432/mytodos
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
+1. Make sure PostgreSQL is installed and running.
+2. Open a terminal or pgAdmin and run:
+    ```sql
+    CREATE DATABASE taskmanager;
     ```
-4. Run the Spring Boot app (`TaskManagerApplication`)
+3. Optionally, seed the database with some users and tasks:
+    ```sql
+    INSERT INTO app_user (email, password, username, description)
+    VALUES 
+      ('bob@example.com', 'password123', 'Bob', 'Let\'s build something'),
+      ('lola@example.com', 'password123', 'Lola', 'Loves productivity'),
+      ('andrew@example.com', 'password123', 'Andrew', 'Just chilling');
+    ```
 
 ---
 
-### 2. Frontend
+### 2. Backend Setup (Spring Boot)
+
+1. Clone the repo:
+    ```bash
+    git clone https://github.com/your-username/mytodos.git
+    cd mytodos/backend
+    ```
+
+2. Update `application.properties` with your PostgreSQL credentials:
+    ```properties
+    spring.datasource.url=jdbc:postgresql://localhost:5432/taskmanager
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
+
+    spring.jpa.hibernate.ddl-auto=update
+    spring.jpa.show-sql=true
+    ```
+
+3. Run the Spring Boot app:
+    - In your IDE: run `TaskManagerApplication.java`
+    - Or from terminal:
+      ```bash
+      ./mvnw spring-boot:run
+      ```
+
+---
+
+### 3. Frontend Setup (React)
 
 ```bash
-cd frontend
+cd ../frontend
 npm install
 npm start
